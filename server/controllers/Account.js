@@ -17,7 +17,7 @@ const logout = (req, res) => {
 const login = (req, res) => {
   // Force cast to strings to cover some security flaws
   const username = `${req.body.username}`;
-  const password = `${req.body.password}`;
+  const password = `${req.body.pass}`;
 
   if (!username || !password) {
     return res.status(400).json({ error: 'RAWR! All fields are required' });
@@ -25,8 +25,6 @@ const login = (req, res) => {
 
   return Account.AccountModel.authenticate(username, password, (err, account) => {
     if (err || !account) {
-        console.log(err);
-        console.log(account);
       return res.status(401).json({ error: 'Wrong username or password' });
     }
 
