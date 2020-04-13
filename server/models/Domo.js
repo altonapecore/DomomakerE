@@ -27,6 +27,11 @@ const DomoSchema = new mongoose.Schema({
     required: true,
     ref: 'Account',
   },
+  otherNicknames: {
+    type: String,
+    trim: true,
+    required: false,
+  },
   createdData: {
     type: Date,
     default: Date.now,
@@ -43,8 +48,10 @@ DomoSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return DomoModel.find(search).select('name age').lean().exec(callback);
+  return DomoModel.find(search).select('name age otherNicknames').lean().exec(callback);
 };
+
+DomoSchema.statics.findAll = (callback) => DomoModel.find().select('name age otherNicknames').lean().exec(callback);
 
 DomoModel = mongoose.model('Domo', DomoSchema);
 

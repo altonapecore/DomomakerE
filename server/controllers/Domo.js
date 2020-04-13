@@ -11,6 +11,7 @@ const makeDomo = (req, res) => {
     name: req.body.name,
     age: req.body.age,
     owner: req.session.account._id,
+    otherNicknames: req.body.otherNicknames,
   };
 
   const newDomo = new Domo.DomoModel(domoData);
@@ -51,6 +52,16 @@ const getDomos = (req, res) => Domo.DomoModel.findByOwner(req.session.account._i
   return res.json({ domos: docs });
 });
 
+const getAllDomos = (req, res) => Domo.DomoModel.findAll((err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred' });
+  }
+
+  return res.json({ domos: docs });
+});
+
 module.exports.makerPage = makerPage;
 module.exports.getDomos = getDomos;
+module.exports.getAllDomos = getAllDomos;
 module.exports.make = makeDomo;
