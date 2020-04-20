@@ -22,7 +22,6 @@ const makeSite = (req, res) => {
   sitePromise.catch((err) => {
     console.log(err);
     if (err.code === 11000) {
-        alert("Site already exists");
       return res.status(4000).json({ error: 'Site already exists' });
     }
 
