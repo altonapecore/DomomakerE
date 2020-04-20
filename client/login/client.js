@@ -1,7 +1,6 @@
 const handleLogin = (e) => {
     e.preventDefault();
 
-    $("#domoMessage").animate({width:'hide'},350);
 
     if($("#user").val() == '' || $("#pass").val() == '') {
         handleError("RAWR! Username or password is empty");
@@ -18,7 +17,6 @@ const handleLogin = (e) => {
 const handleSignup = (e) => {
     e.preventDefault();
 
-    $("#domoMessage").animate({width:'hide'},350);
 
     if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
         handleError("RAWR! All fields are required");
@@ -78,32 +76,7 @@ const SignupWindow = (props) => {
     );
 };
 
-const DomoList = function(props) {
-    if(props.domos.length === 0){
-        return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos yet</h3>
-            </div>
-        );
-    }
 
-    const domoNodes = props.domos.map(function(domo) {
-        return(
-            <div key={domo._id} className="domo">
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName"> Name: {domo.name} </h3>
-                <h3 className="domoAge"> Age: {domo.age} </h3>
-                <h3 className="domoOtherNicknames"> Other Nicknames: {domo.otherNicknames}</h3>
-            </div>
-        );
-    });
-
-    return (
-        <div className="domoList">
-            {domoNodes}
-        </div>
-    );
-};
 
 const createLoginWindow = (csrf) => {
     ReactDOM.render(
@@ -111,11 +84,6 @@ const createLoginWindow = (csrf) => {
         document.querySelector("#content")
     );
 
-    ReactDOM.render(
-        <DomoList domos = {[]} />, document.querySelector("#domos")
-    );
-
-    loadDomos();
 };
 
 const createSignupWindow = (csrf) => {
@@ -145,14 +113,7 @@ const setup = (csrf) => {
     createLoginWindow(csrf); // Default view
 };
 
-// HW STUFF FOR PART E
-const loadDomos = () => {
-    sendAjax('GET', '/getAllDomos', null, (data) => {
-        ReactDOM.render(
-            <DomoList domos={data.domos} />, document.querySelector("#domos")
-        );
-    });
-};
+
 
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
