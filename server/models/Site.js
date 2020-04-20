@@ -5,42 +5,41 @@ const _ = require('underscore');
 
 let SiteModel = {};
 
-const convertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
 
 const SiteSchema = new mongoose.Schema({
-    siteName: {
-        type: String,
-        required: true,
-        trim: true,
-        set: setName,
-    },
-    tag: {
-        type: String,
-        required: true,
-    },
-    creator: {
-        type: mongoose.Schema.ObjectId,
-        required: true,
-        ref: 'Account',
-    },
-    createdDate: {
-        type: Date,
-        default: Date.now,
-    },
+  siteName: {
+    type: String,
+    required: true,
+    trim: true,
+    set: setName,
+  },
+  tag: {
+    type: String,
+    required: true,
+  },
+  creator: {
+    type: mongoose.Schema.ObjectId,
+    required: true,
+    ref: 'Account',
+  },
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 SiteSchema.statics.toAPI = (doc) => ({
-    siteName: doc.siteName,
-    tag: doc.tag,
+  siteName: doc.siteName,
+  tag: doc.tag,
 });
 
 SiteSchema.statics.findByTag = (tag, callback) => {
-    const search = {
-        owner: tag,
-    };
+  const search = {
+    owner: tag,
+  };
 
-    return SiteModel.find(search).select('siteName').lean().exec(callback);
+  return SiteModel.find(search).select('siteName').lean().exec(callback);
 };
 
 SiteSchema.statics.findAll = (callback) => SiteModel.find().select('name').lean().exec(callback);

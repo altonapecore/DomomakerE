@@ -30,7 +30,12 @@ const SiteForm = (props) => {
         >
             <label htmlFor="name">Site Name: </label>
             <input id="siteName" type="text" name="siteName" placeholder="Site Name"/>
-            
+            <select class="rounded" id="tag" name="tag" form="siteForm">
+                <option value="funny">funny</option>
+                <option value="weird">weird</option>
+                <option value="science">science</option>
+                <option value="computers">computers</option>
+            </select>
             <input type="hidden" name="_csrf" value={props.csrf} />
             <input className="makeSiteSubmit" type="submit" value="Submit Site" />
         </form>
