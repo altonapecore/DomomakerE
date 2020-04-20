@@ -4,7 +4,7 @@ const { Site } = models;
 
 const makeSite = (req, res) => {
   if (!req.body.name) {
-    return res.status(400).json({ error: 'SiteName is required' });
+    return res.status(400).json({ error: 'Site name is required' });
   }
 
   const siteData = {
@@ -22,6 +22,7 @@ const makeSite = (req, res) => {
   sitePromise.catch((err) => {
     console.log(err);
     if (err.code === 11000) {
+        alert("Site already exists");
       return res.status(4000).json({ error: 'Site already exists' });
     }
 

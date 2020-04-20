@@ -1,13 +1,13 @@
 const handleSubmission = (e) => {
     e.preventDefault();
 
+    $("#domoMessage").animate({width:'hide'},350);
+
     if($("#siteName").val() == ''){
-        handleError("A site name is required");
         return false;
     }
 
     if(!validateUrl($("#siteName").val())){
-        handleError("The site name is not valid or is too long");
         return false;
     }
 
