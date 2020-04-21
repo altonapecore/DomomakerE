@@ -2,14 +2,15 @@
 
 var handleSubmission = function handleSubmission(e) {
   e.preventDefault();
+  $("#domoMessage").animate({
+    width: 'hide'
+  }, 350);
 
   if ($("#siteName").val() == '') {
-    handleError("A site name is required");
     return false;
   }
 
   if (!validateUrl($("#siteName").val())) {
-    handleError("The site name is not valid or is too long");
     return false;
   }
 
@@ -34,7 +35,20 @@ var SiteForm = function SiteForm(props) {
       type: "text",
       name: "siteName",
       placeholder: "Site Name"
-    }), /*#__PURE__*/React.createElement("input", {
+    }), /*#__PURE__*/React.createElement("select", {
+      "class": "rounded",
+      id: "tag",
+      name: "tag",
+      form: "siteForm"
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "funny"
+    }, "funny"), /*#__PURE__*/React.createElement("option", {
+      value: "weird"
+    }, "weird"), /*#__PURE__*/React.createElement("option", {
+      value: "science"
+    }, "science"), /*#__PURE__*/React.createElement("option", {
+      value: "computers"
+    }, "computers")), /*#__PURE__*/React.createElement("input", {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
@@ -95,6 +109,9 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
+  $("#domoMessage").animate({
+    width: 'toggle'
+  }, 350);
 };
 
 var redirect = function redirect(response) {
