@@ -74,6 +74,7 @@ app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
 app.disable('x-powered-by');
 app.use(cookieParser());
+console.log("is this on");
 
 app.use(csrf());
 app.use((err, req, res, next) => {
