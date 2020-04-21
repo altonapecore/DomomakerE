@@ -21,7 +21,7 @@ const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/RandomSite';
 // Setup mongoose options to use newer functionality
 const mongooseOptions = {
   useNewUrlParser: true,
-  usUnifiedTopology: true,
+  useUnifiedTopology: true,
 };
 
 mongoose.connect(dbURL, mongooseOptions, (err) => {
